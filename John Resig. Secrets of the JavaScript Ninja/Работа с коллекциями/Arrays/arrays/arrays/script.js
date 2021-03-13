@@ -66,5 +66,83 @@ console.log(ninjas);
 
 //enumeration of array's elements
 
+ninjas = ['Yagyu', 'Kuma', 'Hattori'];
 
+for (let i = 0; i < ninjas.length; i++) {
+	console.assert(ninjas[i] != null, ninjas[i]);
+}
+
+ninjas.forEach(ninja => {console.assert(ninja != null, ninja);
+});
+
+ninjas = [
+	{name: 'Yagyu', weapon: 'shurtiken'},
+	{name: 'Yoshi', weapon: 'katana'},
+	{name: 'Kuma', weapon: 'wakizashi'}
+];
+
+//forEach
+let weapons = [];
+ninjas.forEach(ninja => {weapons.push(ninja.weapon);
+});
+
+console.log(weapons[0] === 'shurtiken'
+					&& weapons[1] === 'katana'
+					&& weapons[2] === 'wakizashi'
+					&& weapons.length === 3,
+					'The new array contains all weapons');
+
+//map method
+weapons = ninjas.map(ninja => ninja.weapon);
+	console.log(weapons[0] === 'shurtiken'
+				&& weapons[1] === 'katana'
+				&& weapons[2] === 'wakizashi'
+				&& weapons.length == 3,
+				'The new array contains all weapons');
+
+//every & some methods
+ninjas = [
+	{name: 'Yagyu', weapon: 'shuriken'},
+	{name: 'Yoshi'},
+	{name: 'Kuma', weapon: 'wakizashi'}
+];
+
+let allNinjasAreNamed = ninjas.every(ninja => 'name' in ninja);
+let allNinjasAreArmed = ninjas.every(ninja => 'weapon' in ninja);
+
+console.log(allNinjasAreNamed, 'Every ninja has a name');
+console.log(!allNinjasAreArmed, 'But not every ninja is armed');
+
+let someNinjasAreArmed = ninjas.some(ninja => 'weapon' in ninja);
+console.log(someNinjasAreArmed, 'But some ninjas are armed');
+
+
+//Find method
+
+let ninjaWithWakizashi = ninjas.find(ninja => {
+	return ninja.weapon === 'wakizashi';
+});
+
+console.log(ninjaWithWakizashi.name === 'Kuma' && ninjaWithWakizashi.weapon === 'wakizashi');
+
+let ninjaWithKatana = ninjas.find(ninja => {
+	return ninja.weapon === 'katana';
+});
+
+console.log(ninjaWithKatana === undefined, 'We couldn`t find a ninja that wields a katana');
+
+let armedNinjas = ninjas.filter(ninja => 'weapon' in ninja);
+
+console.log(armedNinjas.length === 2, 'There are two armed ninjas:');
+console.log(armedNinjas[0].name === 'Yagyu' && armedNinjas[1].name === 'Kuma', 'Yagyu and Kuma');
+
+//finding out the index of element in an array
+
+ninjas = ['Yagyu', 'Yoshi', 'Kuma', 'Yoshi'];
+
+console.log(ninjas.indexOf('Yoshi') === 1, 'Yoshi is at index 1');
+console.log(ninjas.lastIndexOf('Yoshi') === 3, 'and at index 3');
+
+let yoshiIndex = ninjas.findIndex(ninja => ninja === 'Yoshi');
+console.log(yoshiIndex === 1, 'Yoshi is still at index 1');
 
